@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script defer src="face-api.min.js"></script>
+  
+  <style>
+    /* body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+    body{
+      align-content: center;
+      margin: 60px;
+    height: calc(100% - 120px);
+    width: calc(100% - 120px);
+    background: #000;
+    color: #aaa;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 2em;
+    line-height: 1.5em;
+    -webkit-font-smoothing: antialiased;
+    
+    }
+    .videoContainer {
+    position: relative;
+    
+  
+    border-radius: 5px;
+    background-attachment: scroll;
+    overflow: hidden;
+}
+
+.videoContainer video {
+    
+    position: relative;
+    z-index: 1;
+}
+.videoContainer .overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    background: black;
+    opacity: 1;
+}
+.output{
+  color: white;
+  align-content: center;
+  height: 50px;
+  font-weight: 100;
+  width: 100px;
+
+}
+
+    canvas {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div class="videoContainer hide-for-small-only">
+    <div class="overlay"></div>
+  <!-- <video id="video" width="50" height="50" autoplay muted></video> -->
+  <!-- <div id="hidemyvideo"> -->
+  <video id="video" width="200" height="200" autoplay muted></video>
+  </div>
+  <h1><p id="output" style="text-align:center">Hello, Guest</p>
+  </h1>
+  <script defer src="script.js"></script>
+<!-- </div> -->
+</body>
+</html>
