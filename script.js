@@ -34,7 +34,7 @@ video.addEventListener('play', async() => {
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
 
     results.forEach((result, i) => {
-     
+    
       name = result.toString()
       name = name.substring(0,name.length-6)
       if(name.startsWith("u",0)){
