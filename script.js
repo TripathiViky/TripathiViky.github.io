@@ -18,7 +18,7 @@ function startVideo() {
   )
 }
 
-video.addEventListener('play', () => {
+video.addEventListener('play', async() => {
 	console.log("Loaded..")
   var name = "Guest";
   const labeledFaceDescriptors = await loadLabeledImages()
