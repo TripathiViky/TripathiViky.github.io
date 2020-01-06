@@ -18,7 +18,7 @@ function startVideo() {
   )
 }
 
-video.addEventListener('play', async() => {
+video.addEventListener('play', () => {
   var name = "Guest";
   const labeledFaceDescriptors = await loadLabeledImages()
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
