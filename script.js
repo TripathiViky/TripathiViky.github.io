@@ -11,11 +11,7 @@ Promise.all([
 ]).then(startVideo)
 
 function startVideo() {
-  navigator.getUserMedia = (navigator.getUserMedia ||
-                          navigator.webkitGetUserMedia ||
-                          navigator.mozGetUserMedia ||
-                          navigator.msGetUserMedia ||
-                          navigator.oGetUserMedia );
+ 
 navigator.getUserMedia(
     { video: {} },
     stream => video.srcObject = stream,
