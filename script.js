@@ -33,7 +33,6 @@ video.addEventListener('playing', async() => {
  
   setInterval(async () => {
 
-   
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors()
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
