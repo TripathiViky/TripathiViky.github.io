@@ -18,7 +18,7 @@ navigator.getUserMedia(
   )
 }
 
-video.addEventListener('playing', async() => {
+video.addEventListener('play', async() => {
 	console.log("Loaded..")
   var name = "Guest";
   const labeledFaceDescriptors = await loadLabeledImages()
