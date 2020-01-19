@@ -38,6 +38,9 @@ video.addEventListener('playing', async() => {
       name = result.toString()
       name = name.substring(0,name.length-6)
       if(name.startsWith("u",0)){
+	      let expressionobj = resizedexDetections[0].expressions;
+	    var max = Math.max.apply(null,Object.keys(expressionobj).map(function(x){ return expressionobj[x] }));
+	    var myexpression = Object.keys(expressionobj).filter(function(x){ return expressionobj[x] == max; })[0]
       name="Hello, Guest"
       console.log("Hello, Guest")
 if(myexpression=="neutral"){
