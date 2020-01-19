@@ -92,7 +92,7 @@ if(myexpression=="neutral"){
     console.log(name)
     }
     document.getElementById('output').innerHTML=name;
-
+	document.getElementById('outexpression').innerHTML=myexpression;
     })
   }, 500)
 })
