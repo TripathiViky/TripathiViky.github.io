@@ -1,1 +1,1 @@
-"# TripathiViky.github.io" 
+"<b>Facial Recognition for Smart Mirror<b>" 
