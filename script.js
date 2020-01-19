@@ -30,17 +30,65 @@ video.addEventListener('playing', async() => {
     const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors()
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     const results = resizedDetections.map(d => faceMatcher.findBestMatch(d.descriptor))
+    const exdetections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
 
+    const resizedexDetections = faceapi.resizeResults(exdetections, displaySize)
     results.forEach((result, i) => {
     
       name = result.toString()
       name = name.substring(0,name.length-6)
       if(name.startsWith("u",0)){
       name="Hello, Guest"
-      console.log("Hello, Guest")  
+      console.log("Hello, Guest")
+if(myexpression=="neutral"){
+      myexpression="🙂 Smile Please!"
+    }
+    else if(myexpression=="sad"){
+      myexpression="😟 Why are you sad?"
+    }
+    else if(myexpression=="happy"){
+      myexpression="😄 What makes you happy?"
+    }
+    else if(myexpression=="angry"){
+      myexpression="😡 Don't be angry"
+    }
+    else if(myexpression=="fearful"){
+      myexpression="😞 You got scared"
+    }
+    else if(myexpression=="surprised"){
+      myexpression="😮 Surprise!!!"
     }
     else{
+      myexpression=""
+    }
+    }
+    else{
+    let expressionobj = resizedexDetections[0].expressions;
+	    var max = Math.max.apply(null,Object.keys(expressionobj).map(function(x){ return expressionobj[x] }));
+	    var myexpression = Object.keys(expressionobj).filter(function(x){ return expressionobj[x] == max; })[0]
+	    //console.log(resizedexDetections[0].expressions)
     name= "Hello, "+name
+    if(myexpression=="neutral"){
+      myexpression="🙂 Smile Please!"
+    }
+    else if(myexpression=="sad"){
+      myexpression="😟 Why are you sad?"
+    }
+    else if(myexpression=="happy"){
+      myexpression="😄 What makes you happy?"
+    }
+    else if(myexpression=="angry"){
+      myexpression="😡 Don't be angry"
+    }
+    else if(myexpression=="fearful"){
+      myexpression="😞 You got scared"
+    }
+    else if(myexpression=="surprised"){
+      myexpression="😮 Surprise!!!"
+    }
+    else{
+      myexpression="🙂 Smile Please!"
+    }
     console.log(name)
     }
     document.getElementById('output').innerHTML=name;
