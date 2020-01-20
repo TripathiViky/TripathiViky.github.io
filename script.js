@@ -6,14 +6,15 @@ Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('models'),
   faceapi.nets.faceExpressionNet.loadFromUri('models'),
   faceapi.nets.ssdMobilenetv1.loadFromUri('models'),
-  faceapi.nets.ssdMobilenetv1.loadFromUri('models')
+  faceapi.nets.ssdMobilenetv1.loadFromUri('models'),
+  faceapi.nets.ageGenderNet.loadFromUri('models')
 ]).then(startVideo)
 
 function startVideo() {
 navigator.getUserMedia(
     { video: {} },
     stream => video.srcObject = stream,
-    err => console.error(err)
+    err => console.error(err) 
   )
 }
 
@@ -33,44 +34,79 @@ video.addEventListener('playing', async() => {
     const exdetections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions()
 
     const resizedexDetections = faceapi.resizeResults(exdetections, displaySize)
-    results.forEach((result, i) => {
+    const agegenderdetections = await faceapi.detectSingleFace(video).withAgeAndGender()
+
+
+
+    try{
+      const resizedagenGenderDetections = faceapi.resizeResults(agegenderdetections, displaySize)
+      var mygender = resizedagenGenderDetections.gender
+      var myage = resizedagenGenderDetections.age
+      let expressionobj = resizedexDetections[0].expressions;
+      var max = Math.max.apply(null,Object.keys(expressionobj).map(function(x){ return expressionobj[x] }));
+var myexpression = Object.keys(expressionobj).filter(function(x){ return expressionobj[x] == max; })[0]
+      console.log(resizedexDetections[0].expressions)
+    }
+    catch{
+      myage="";
+      mygender=""
+    }
     
+    const rounded = Math.floor(myage);
+    results.forEach((result, i) => {
+
       name = result.toString()
       name = name.substring(0,name.length-6)
+      
+
       if(name.startsWith("u",0)){
-	      let expressionobj = resizedexDetections[0].expressions;
-	    var max = Math.max.apply(null,Object.keys(expressionobj).map(function(x){ return expressionobj[x] }));
-	    var myexpression = Object.keys(expressionobj).filter(function(x){ return expressionobj[x] == max; })[0]
+      if(mygender=="male"){
+        mygender="👨 "+rounded
+      }
+      else if(mygender=="female"){
+        mygender="👩 "+rounded
+      }
+      else{
+        mygender=""+rounded
+      }
+      
       name="Hello, Guest"
-      console.log("Hello, Guest")
-if(myexpression=="neutral"){
-      myexpression="🙂 Smile Please!"
-    }
-    else if(myexpression=="sad"){
-      myexpression="😟 Why are you sad?"
-    }
-    else if(myexpression=="happy"){
-      myexpression="😄 What makes you happy?"
-    }
-    else if(myexpression=="angry"){
-      myexpression="😡 Don't be angry"
-    }
-    else if(myexpression=="fearful"){
-      myexpression="😞 You got scared"
-    }
-    else if(myexpression=="surprised"){
-      myexpression="😮 Surprise!!!"
+      console.log("Hello, Guest")  
+      if(myexpression=="neutral"){
+        myexpression="🙂 Smile Please!"
+      }
+      else if(myexpression=="sad"){
+        myexpression="😟 Why are you sad?"
+      }
+      else if(myexpression=="happy"){
+        myexpression="😄 What makes you happy?"
+      }
+      else if(myexpression=="angry"){
+        myexpression="😡 Don't be angry"
+      }
+      else if(myexpression=="fearful"){
+        myexpression="😞 You got scared"
+      }
+      else if(myexpression=="surprised"){
+        myexpression="😮 Surprise!!!"
+      }
+      else{
+        myexpression=""
+      }
     }
     else{
-      myexpression=""
-    }
-    }
-    else{
-    let expressionobj = resizedexDetections[0].expressions;
-	    var max = Math.max.apply(null,Object.keys(expressionobj).map(function(x){ return expressionobj[x] }));
-	    var myexpression = Object.keys(expressionobj).filter(function(x){ return expressionobj[x] == max; })[0]
-	    //console.log(resizedexDetections[0].expressions)
+      
+      
     name= "Hello, "+name
+    if(mygender=="male"){
+      mygender="👨 "+rounded
+    }
+    else if(mygender=="female"){
+      mygender="👩 "+rounded
+    }
+    else{
+      mygender=""+rounded
+    }
     if(myexpression=="neutral"){
       myexpression="🙂 Smile Please!"
     }
@@ -95,7 +131,8 @@ if(myexpression=="neutral"){
     console.log(name)
     }
     document.getElementById('output').innerHTML=name;
-	document.getElementById('outexpression').innerHTML=myexpression;
+    document.getElementById('outexpression').innerHTML=myexpression;
+    document.getElementById('outgenderage').innerHTML=mygender;
     })
   }, 500)
 })
@@ -114,5 +151,3 @@ function loadLabeledImages() {
     })
   )
 }
-
-
