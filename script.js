@@ -20,7 +20,7 @@ navigator.getUserMedia(
 
 video.addEventListener('playing', async() => {
 	console.log("Loaded..")
-  var name = "Guest";
+  var name = "Air Arabia";
   const labeledFaceDescriptors = await loadLabeledImages()
   const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
 
