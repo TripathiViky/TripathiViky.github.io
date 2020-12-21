@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script defer src="face-api.min.js"></script>
-  
-  <style>
-    /* body {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script defer src="face-api.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /* body {
       margin: 0;
       padding: 0;
       width: 100vw;
@@ -17,87 +18,167 @@
       justify-content: center;
       align-items: center;
     } */
-    body{
-      align-content: center;
-      margin: 60px;
-    height: calc(100% - 120px);
-    width: calc(100% - 120px);
-    background: #000;
-    color: #aaa;
-    font-family: "Roboto Condensed", sans-serif;
-    font-weight: 400;
-    font-size: 2em;
-    line-height: 1.5em;
-    -webkit-font-smoothing: antialiased;
-    
-    }
-    .videoContainer {
-    position: relative;
-    
-  
-    border-radius: 5px;
-    background-attachment: scroll;
-    overflow: hidden;
-}
+        body {
+            align-content: center;
+            margin: 60px;
+            height: calc(100% - 120px);
+            width: calc(100% - 120px);
+            background: #000;
+            color: #aaa;
+            font-family: "Roboto Condensed", sans-serif;
+            font-weight: 400;
+            font-size: 2em;
+            line-height: 1.5em;
+            -webkit-font-smoothing: antialiased;
 
-.videoContainer video {
-    
-    position: relative;
-    z-index: 1;
-}
-.videoContainer .overlay {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 2;
-    background: black;
-    opacity: 1;
-}
-.output{
-  color: white;
-  align-content: center;
-  height: 50px;
-  font-weight: 100;
-  width: 100px;
+        }
 
-}
-.outexpression{
-  color: white;
-  align-content: center;
-  height: 50px;
-  font-weight: 100;
-  width: 100px;
+        .videoContainer {
+            position: relative;
 
-}
-.outgenderage{
-  color: white;
-  align-content: center;
-  height: 50px;
-  font-weight: 100;
-  width: 100px;
 
-}
-    canvas {
-      position: absolute;
-    }
-  </style>
+            border-radius: 5px;
+            background-attachment: scroll;
+            overflow: hidden;
+        }
+
+        .videoContainer video {
+
+            position: relative;
+            z-index: 1;
+        }
+
+        .videoContainer .overlay {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 2;
+            background: black;
+            opacity: 1;
+        }
+
+        .output {
+            color: white;
+            align-content: center;
+            height: 50px;
+            font-weight: 100;
+            width: 100px;
+
+        }
+
+        .outexpression {
+            color: white;
+            align-content: center;
+            height: 50px;
+            font-weight: 100;
+            width: 100px;
+
+        }
+
+        .outgenderage {
+            color: white;
+            align-content: center;
+            height: 50px;
+            font-weight: 100;
+            width: 100px;
+
+        }
+
+        canvas {
+            position: absolute;
+        }
+    </style>
+
+    <!--  -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .mySlides {
+            display: none;
+        }
+    </style>
+    <!--  -->
 </head>
+
 <body>
-  <div class="videoContainer hide-for-small-only">
-    <div class="overlay"></div>
-  <!-- <video id="video" width="50" height="50" autoplay muted></video> -->
-  <!-- <div id="hidemyvideo"> -->
-  <video id="video" src="rtsp://192.168.1.69:8554/unicast" width="100" height="100" autoplay muted></video>
-  </div>
-  <h1><p id="output" style="text-align:center">Welcome Gareth Edwards</p>
+    <div class="videoContainer hide-for-small-only">
+        <div class="overlay"></div>
+        <!-- <video id="video" width="50" height="50" autoplay muted></video> -->
+        <!-- <div id="hidemyvideo"> -->
+        <!-- <video id="video" width="25" height="25" autoplay muted></video> -->
+    </div>
+
+
+    <!-- <h1>
+    <p id="output" style="text-align:center">Welcome Guests</p>
   </h1>
-  <h1><p id="outexpression" style="text-align:center"></p>
-  </h1>
-  <h1><p id="outgenderage" style="text-align:center"></p>
-  </h1>
-  <script defer src="script.js"></script>
-<!-- </div> -->
+  <h1>
+    <p id="outexpression" style="text-align:center"></p>
+  </h1> -->
+    <!-- <h1>
+    <p id="outgenderage" style="text-align:center"></p>
+  </h1> -->
+    <script defer src="script.js"></script>
+    <!-- </div> -->
+
+    <!--  -->
+
+    <!-- <h2>Automatic Slideshow</h2>
+  <p>Change image every 2 seconds:</p> -->
+
+    <div id="slideContainer" class="w3-content w3-section" style="width:100%">
+        <img id="mySlides" class="mySlides" src="./generic_ads/0.jpg" style="width:100%">
+        <img id="mySlides" class="mySlides" src="./generic_ads/1.jpg" style="width:100%">
+        <img id="mySlides" class="mySlides" src="./generic_ads/2.jpg" style="width:100%">
+        <img id="mySlides" class="mySlides" src="./generic_ads/3.jpg" style="width:100%">
+        <img id="mySlides" class="mySlides" src="./generic_ads/4.jpg" style="width:100%">
+        <img id="mySlides" class="mySlides" src="./generic_ads/5.jpg" style="width:100%">
+    </div>
+    <br>
+
+    <!-- <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div> -->
+
+
+    <div id="maleSlides" style="display: none;">
+        <img id="mySlides" src="./male_ads/1.png" style="width:100%">
+        <img id="mySlides" src="./male_ads/2.png" style="width:100%">
+    </div>
+
+
+    <div id="femaleSlides" style="display: none;">
+        <img id="mySlides" src="./female_ads/1.png" style="width:100%">
+        <img id="mySlides" src="./female_ads/2.png" style="width:100%">
+    </div>
+
+
+    <div id="generic" style="display: none;">
+        <img id="mySlides" src="./male_ads/0.png" style="width:100%">
+        <img id="mySlides" src="./male_ads/3.png" style="width:100%">
+    </div>
+
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 3000); // Change image every 2 seconds
+        }
+    </script>
+
+    <!--  -->
 </body>
+
 </html>
